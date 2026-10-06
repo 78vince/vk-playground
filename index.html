@@ -3044,8 +3044,8 @@ a.c-row:focus-visible, .copy:focus-visible { outline: none; box-shadow: 0 0 0 3p
         far.map(function (m, j) { var iw = m.w * .35 + 80;
           return h('div', { key: j, className: 'isle', style: { left: m.x, width: iw, height: iw * .55, top: top + 90 + rnd(sd + j + 401) * vh * .28, animationDelay: (-j * 1.7) + 's' } },
             h('span', { className: 'is-rock' }), h('span', { className: 'is-grass' }),
-            j === 2 ? siamese() : null,
-            (j === 2 ? [.14, .84] : [0, 1, 2].slice(0, 1 + (j % 3))).map(function (k0, k) { var u = j === 2 ? k0 : .18 + k * .26 + rnd(sd + j * 7 + k) * .08; return h('span', { key: k, className: 'is-tree', style: { left: (u * 100) + '%', '--ts': (.7 + rnd(sd + j + k * 3) * .5).toFixed(2) } }, h('i', null)); })); })),
+            j === 1 ? siamese() : null,
+            (j === 1 ? [.14, .84] : [0, 1, 2].slice(0, 1 + (j % 3))).map(function (k0, k) { var u = j === 1 ? k0 : .18 + k * .26 + rnd(sd + j * 7 + k) * .08; return h('span', { key: k, className: 'is-tree', style: { left: (u * 100) + '%', '--ts': (.7 + rnd(sd + j + k * 3) * .5).toFixed(2) } }, h('i', null)); })); })),
       h('div', { key: 'cloud', className: 'layer', ref: refs.cloud, style: layerStyle(.3), 'aria-hidden': true },
         clouds.map(function (c, j) { return h('span', { key: j, className: 'aurora vk-t-' + ['coral', 'lilac', 'mint', 'sky'][j % 4], style: { left: c.x, top: c.y - 40, width: c.w * 1.8, animationDelay: (-j * 2.3) + 's' } }); })),
       h('div', { key: 'near', className: 'layer', ref: refs.near, style: layerStyle(.22), 'aria-hidden': true },
