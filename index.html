@@ -1438,6 +1438,9 @@ a.c-row:focus-visible, .copy:focus-visible { outline: none; box-shadow: 0 0 0 3p
 .player.fly-side .wing { z-index: 2; filter: none; }
 .player.fly-side.face-right .wing.r, .player.fly-side.face-left .wing.l { z-index: 1; filter: brightness(.82); }
 .player.flying .wings { animation: none; }
+/* wings v4: from the side the stroke runs the other way */
+.player.fly-side.face-right .wing { animation-name: flap !important; }
+.player.fly-side.face-left .wing { animation-name: flap-l !important; }
 
 </style>
 <div id="root"></div>
