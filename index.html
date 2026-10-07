@@ -1433,6 +1433,11 @@ a.c-row:focus-visible, .copy:focus-visible { outline: none; box-shadow: 0 0 0 3p
 .player.fly-side.face-right .wing.r, .player.fly-side.face-left .wing.l { top: -42px; scale: .86; filter: brightness(.9); animation-delay: -120ms; }
 .player.fly-side.face-right .wings { margin-left: -24px !important; } .player.fly-side.face-left .wings { margin-left: 10px !important; }
 .player.fly-side .wings { top: 58%; } .player.fly-side.face-right .wings { margin-left: -30px !important; } .player.fly-side.face-left .wings { margin-left: 16px !important; }
+/* wings v3: both wings flap in sync; from the side the far wing sits underneath and is dimmer */
+.player.flying .wing { animation-delay: 0s !important; animation-duration: 360ms; }
+.player.fly-side .wing { z-index: 2; filter: none; }
+.player.fly-side.face-right .wing.r, .player.fly-side.face-left .wing.l { z-index: 1; filter: brightness(.82); }
+.player.flying .wings { animation: none; }
 
 </style>
 <div id="root"></div>
@@ -3219,7 +3224,7 @@ a.c-row:focus-visible, .copy:focus-visible { outline: none; box-shadow: 0 0 0 3p
         })),
         h('span', { className: 'p-shadow', ref: shadowRef, style: { bottom: feet - 6, width: charSize * .6 } }),
         h('div', { className: 'player' + (flying ? ' flying face-' + facing + (pose === 'airSide' || pose === 'fallSide' ? ' fly-side' : ' fly-front') : ''), ref: playerRef, style: { bottom: feet - charSize * 0.05 } },
-          flying ? h('span', { className: 'wings', 'aria-hidden': true }, h('i', { className: 'wing l' }, h('b', null), h('b', null), h('b', null)), h('i', { className: 'wing r' }, h('b', null), h('b', null), h('b', null))) : null,
+          flying ? h('span', { key: 'wg-' + facing + (pose === 'airSide' || pose === 'fallSide' ? 's' : 'f'), className: 'wings', 'aria-hidden': true }, h('i', { className: 'wing l' }, h('b', null), h('b', null), h('b', null)), h('i', { className: 'wing r' }, h('b', null), h('b', null), h('b', null))) : null,
           h(V.Character, { pose: pose, facing: facing, size: charSize, label: t.me }))),
       h('div', { className: 'layer', ref: refs.fg, style: layerStyle(1.4), 'aria-hidden': true },
         fg.map(function (b, j) { return h('div', { key: j, className: ch === 1 ? 'fg-rock' : ch === 2 ? 'fg-rock fg-rock2' : ch === 3 ? 'fg-bush fg-hedge3' : ch === 4 ? 'fg-bush fg-plant4' : ch === 5 ? 'fg-rock fg-rock5' : 'fg-bush', style: { left: b.x, width: b.w, height: b.h, bottom: -b.h * .35 } }); })));
