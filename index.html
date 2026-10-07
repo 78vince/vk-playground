@@ -1418,6 +1418,21 @@ a.c-row:focus-visible, .copy:focus-visible { outline: none; box-shadow: 0 0 0 3p
 @media (prefers-reduced-motion: reduce) { .wing { animation: none; } }
 .player.flying > .vk-char, .player.flying > svg, .player.flying > :not(.wings) { position: relative; z-index: 1; }
 .wings { z-index: 0; top: 52%; }
+/* wings v2: centred and symmetric from the front; both wings on the back when seen from the side */
+.player.flying .wings { margin-left: 0 !important; }
+.player.fly-side .wings { top: 50%; }
+.player.fly-side.face-right .wings { margin-left: -6px !important; }
+.player.fly-side.face-left .wings { margin-left: 6px !important; }
+/* facing right: the back is on the left, so both wings sweep left */
+.player.fly-side.face-right .wing.r { left: auto; right: 0; transform-origin: 100% 100%; animation-name: flap-l; }
+.player.fly-side.face-right .wing.r b { left: auto; right: 0; }
+/* facing left: both sweep right */
+.player.fly-side.face-left .wing.l { right: auto; left: 0; transform-origin: 0 100%; animation-name: flap; }
+.player.fly-side.face-left .wing.l b { right: auto; left: 0; }
+/* the far wing sits a little higher, smaller, slightly darker and a beat behind */
+.player.fly-side.face-right .wing.r, .player.fly-side.face-left .wing.l { top: -42px; scale: .86; filter: brightness(.9); animation-delay: -120ms; }
+.player.fly-side.face-right .wings { margin-left: -24px !important; } .player.fly-side.face-left .wings { margin-left: 10px !important; }
+.player.fly-side .wings { top: 58%; } .player.fly-side.face-right .wings { margin-left: -30px !important; } .player.fly-side.face-left .wings { margin-left: 16px !important; }
 
 </style>
 <div id="root"></div>
@@ -3203,7 +3218,7 @@ a.c-row:focus-visible, .copy:focus-visible { outline: none; box-shadow: 0 0 0 3p
           return h('div', { key: j, style: { position: 'absolute', left: d[0], bottom: feet - 6, transform: 'translateX(-50%)' } }, h(V.WorldProp, { kind: d[1], tone: d[2], size: 96 }));
         })),
         h('span', { className: 'p-shadow', ref: shadowRef, style: { bottom: feet - 6, width: charSize * .6 } }),
-        h('div', { className: 'player' + (flying ? ' flying face-' + facing : ''), ref: playerRef, style: { bottom: feet - charSize * 0.05 } },
+        h('div', { className: 'player' + (flying ? ' flying face-' + facing + (pose === 'airSide' || pose === 'fallSide' ? ' fly-side' : ' fly-front') : ''), ref: playerRef, style: { bottom: feet - charSize * 0.05 } },
           flying ? h('span', { className: 'wings', 'aria-hidden': true }, h('i', { className: 'wing l' }, h('b', null), h('b', null), h('b', null)), h('i', { className: 'wing r' }, h('b', null), h('b', null), h('b', null))) : null,
           h(V.Character, { pose: pose, facing: facing, size: charSize, label: t.me }))),
       h('div', { className: 'layer', ref: refs.fg, style: layerStyle(1.4), 'aria-hidden': true },
