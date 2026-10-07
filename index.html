@@ -1441,6 +1441,9 @@ a.c-row:focus-visible, .copy:focus-visible { outline: none; box-shadow: 0 0 0 3p
 /* wings v4: from the side the stroke runs the other way */
 .player.fly-side.face-right .wing { animation-name: flap !important; }
 .player.fly-side.face-left .wing { animation-name: flap-l !important; }
+/* wings v5: from the side the far wing strokes opposite to the near wing */
+.player.fly-side.face-right .wing.r { animation-name: flap-l !important; }
+.player.fly-side.face-left .wing.l { animation-name: flap !important; }
 
 </style>
 <div id="root"></div>
