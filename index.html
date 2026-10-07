@@ -1397,6 +1397,28 @@ a.c-row:focus-visible, .copy:focus-visible { outline: none; box-shadow: 0 0 0 3p
 @keyframes pk-look { 0%, 47% { transform: translateX(0); } 50% { transform: translateX(-60%); } 53% { transform: translateX(-60%); } 56% { transform: translateX(60%); } 59% { transform: translateX(60%); } 61%, 100% { transform: translateX(0); } }
 @media (prefers-reduced-motion: reduce) { .spire.peeker, .pk-eyes b { animation: none; } }
 
+/* ---------- secret: wings (↑↑↓↓←→←→BA) ---------- */
+.wings { position: absolute; left: 50%; top: 40%; width: 0; height: 0; pointer-events: none; animation: wings-in 420ms var(--ease-spring) both; }
+.wing { position: absolute; top: -34px; width: 74px; height: 58px; transform-origin: 0 100%; animation: flap 360ms var(--ease-in-out) infinite alternate; }
+.wing.l { right: 0; transform-origin: 100% 100%; animation-name: flap-l; }
+.wing.r { left: 0; }
+.wing b { position: absolute; bottom: 0; height: 22px; border-radius: 999px; background: #ffffff; box-shadow: inset 0 -4px 0 rgba(150, 170, 220, .35); }
+.wing.r b:nth-child(1) { left: 0; width: 74px; bottom: 34px; height: 24px; }
+.wing.r b:nth-child(2) { left: 0; width: 60px; bottom: 16px; }
+.wing.r b:nth-child(3) { left: 0; width: 44px; bottom: 0; }
+.wing.l b:nth-child(1) { right: 0; width: 74px; bottom: 34px; height: 24px; }
+.wing.l b:nth-child(2) { right: 0; width: 60px; bottom: 16px; }
+.wing.l b:nth-child(3) { right: 0; width: 44px; bottom: 0; }
+.player.face-right .wings { margin-left: -14px; } .player.face-left .wings { margin-left: 14px; }
+:root[data-theme="dark"] .wing b { background: #f6f0ff; box-shadow: inset 0 -4px 0 rgba(150, 170, 220, .35), 0 0 12px 2px rgba(255, 246, 216, .5); }
+@keyframes flap { from { transform: rotate(-22deg); } to { transform: rotate(14deg); } }
+@keyframes flap-l { from { transform: rotate(22deg); } to { transform: rotate(-14deg); } }
+@keyframes wings-in { from { transform: scale(0); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+.player.flying .p-shadow { opacity: .4; }
+@media (prefers-reduced-motion: reduce) { .wing { animation: none; } }
+.player.flying > .vk-char, .player.flying > svg, .player.flying > :not(.wings) { position: relative; z-index: 1; }
+.wings { z-index: 0; top: 52%; }
+
 </style>
 <div id="root"></div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/react/18.3.1/umd/react.production.min.js"></script>
@@ -2018,7 +2040,7 @@ a.c-row:focus-visible, .copy:focus-visible { outline: none; box-shadow: 0 0 0 3p
         ['2010 – 2012', '鴻海精密工業股份有限公司', '資深工程師', '電視機上盒開發、App 應用人因分析、線上教學網架構。'],
         ['2012 – 2017', '訊凱國際股份有限公司', '資深設計', '散熱器軟體介面設計、2016 台北 Computex 展區規劃、2016 CASE MOD 主視覺設計、Maker 職人活動企劃、品牌展示架設計等。'],
         ['2017 – 至今', '自由工作者', '', '因照顧家庭離開職場，轉為接案工作至今，服務客戶包含訊凱國際股份有限公司、台灣地板滾球協會、泡泡糖定製影像、宇瞻科技股份有限公司、Kinu 做點心等。']],
-      arrive: '抵達', gotK: '獲得道具', scrollK: '獲得委託捲軸', postK: '獲得作品明信片', bagPosts: '作品明信片', bagK: '背包', bagOpen: '打開背包', bagTools: '道具', bagScrolls: '委託捲軸', bagEmpty: '還沒收集', bagHint: '在第 2 章撞水晶方塊收集道具，在第 3 章接下委託收集捲軸，在第 4 章看作品收集明信片。', stepK: '流程推進', questK: '接下委託', swK: '傳送石啟動', achieveK: '成就解鎖', achieve: '認識小禮', explored: '已探索', menu: '章節選單', sound: '音效', close: '關閉',
+      arrive: '抵達', gotK: '獲得道具', scrollK: '獲得委託捲軸', secretK: '隱藏技能', flyOn: '長出翅膀了！方向鍵飛行，空白鍵降落', flyOnTouch: '長出翅膀了！十字鍵飛行，B 降落', postK: '獲得作品明信片', bagPosts: '作品明信片', bagK: '背包', bagOpen: '打開背包', bagTools: '道具', bagScrolls: '委託捲軸', bagEmpty: '還沒收集', bagHint: '在第 2 章撞水晶方塊收集道具，在第 3 章接下委託收集捲軸，在第 4 章看作品收集明信片。', stepK: '流程推進', questK: '接下委託', swK: '傳送石啟動', achieveK: '成就解鎖', achieve: '認識小禮', explored: '已探索', menu: '章節選單', sound: '音效', close: '關閉',
       day: '白天', night: '夜晚', themeLabel: '白天或夜晚', langLabel: '語言', me: '小禮',
       chapters: [['起始村莊', '關於我'], ['冒險時光驛站', '經歷'], ['道具庫', '技能與工具'], ['委託公會', '服務與流程'], ['作品展覽館', '作品集'], ['傳送門', '聯絡我']],
       soon: '即將開放', here: '目前位置', soonToast: '這個章節即將開放', padA: '奔跑', padB: '跳躍'
@@ -2087,7 +2109,7 @@ a.c-row:focus-visible, .copy:focus-visible { outline: none; box-shadow: 0 0 0 3p
         ['2010 – 2012', 'Hon Hai Precision Industry Co., Ltd. (Foxconn)', 'Senior Engineer', 'Developed a TV set-top box, conducted human-factors analysis for app applications, and built the architecture for an online learning platform.'],
         ['2012 – 2017', 'Cooler Master Co., Ltd.', 'Senior Designer', 'Designed software interfaces for cooling products, planned the 2016 Taipei Computex exhibition area, created the key visual for 2016 CASE MOD, organized the Maker Craftsman event series, and designed brand display stands.'],
         ['2017 – Present', 'Freelancer', '', "Left full-time employment to care for family and have worked as a freelancer ever since. Clients have included Cooler Master Inc., the Taiwan Boccia Association, Bubblegum Custom Photography (泡泡糖定製影像), Apacer Technology Inc., and Kinu's Baking Studio."]],
-      arrive: 'Arrived', gotK: 'Item get', scrollK: 'Quest scroll get', postK: 'Postcard get', bagPosts: 'Postcards', bagK: 'Bag', bagOpen: 'Open bag', bagTools: 'Items', bagScrolls: 'Quest scrolls', bagEmpty: 'Not yet', bagHint: 'Bump crystal blocks in Chapter 2 for items, take commissions in Chapter 3 for scrolls, and view works in Chapter 4 for postcards.', stepK: 'Next step', questK: 'Quest accepted', swK: 'Portal stone', achieveK: 'Achievement', achieve: 'Met Vincent', explored: 'Explored', menu: 'Chapters', sound: 'Sound', close: 'Close',
+      arrive: 'Arrived', gotK: 'Item get', scrollK: 'Quest scroll get', secretK: 'Secret skill', flyOn: 'Wings! Arrow keys to fly, Space to land', flyOnTouch: 'Wings! D-pad to fly, B to land', postK: 'Postcard get', bagPosts: 'Postcards', bagK: 'Bag', bagOpen: 'Open bag', bagTools: 'Items', bagScrolls: 'Quest scrolls', bagEmpty: 'Not yet', bagHint: 'Bump crystal blocks in Chapter 2 for items, take commissions in Chapter 3 for scrolls, and view works in Chapter 4 for postcards.', stepK: 'Next step', questK: 'Quest accepted', swK: 'Portal stone', achieveK: 'Achievement', achieve: 'Met Vincent', explored: 'Explored', menu: 'Chapters', sound: 'Sound', close: 'Close',
       day: 'Day', night: 'Night', themeLabel: 'Day or night', langLabel: 'Language', me: 'Vincent',
       chapters: [['Spawn Village', 'About me'], ['Adventure Waystation', 'Experience'], ['Item Vault', 'Skills & tools'], ['Commission Guild', 'Services & process'], ['Works Gallery', 'Portfolio'], ['The Portal', 'Contact']],
       soon: 'Opens soon', here: 'You are here', soonToast: 'This chapter opens soon', padA: 'Run', padB: 'Jump'
@@ -2215,6 +2237,7 @@ a.c-row:focus-visible, .copy:focus-visible { outline: none; box-shadow: 0 0 0 3p
     var viewedS = useState({}), viewed = viewedS[0];
     var nearFS = useState(null), nearFrame = nearFS[0];
     var plateS = useState(null), pressedPlate = plateS[0];
+    var wingS = useState(false), flying = wingS[0];
     var beaconS = useState({}), beacons = beaconS[0];
     var nearSwS = useState(null), nearSwitch = nearSwS[0];
     var visitedS = useState({ 0: true }), visited = visitedS[0];
@@ -2382,7 +2405,7 @@ a.c-row:focus-visible, .copy:focus-visible { outline: none; box-shadow: 0 0 0 3p
     /* the tallest a panel may be on a phone: from below the HUD to just above the hero's head */
     var pmax = Math.max(110, vh - top - 8 - (groundH - 34 + 20));
     var snaps = !mob ? [] : Object.keys(P).map(function (k) { return k === 'wall' ? [P.wall, WW] : k === 'flow' ? [P.flow, Math.min(780, vw - 48)] : [P[k], W]; });
-    var geo = useRef({}); geo.current = { mob: mob, snaps: snaps, frames: frames, vw: vw, WORLD: WORLD, charSize: charSize, P: P, W: W, portalX: portalX, plats: plats, headH: headH, pebbles: pebbles, ZONES: ZONES, trig: trig, ch: ch, entryX: entryX, startX: startX, exitTo: exitTo };
+    var geo = useRef({}); geo.current = { flyMax: Math.max(60, vh - top - (groundH - 34) - headH - 24), mob: mob, snaps: snaps, frames: frames, vw: vw, WORLD: WORLD, charSize: charSize, P: P, W: W, portalX: portalX, plats: plats, headH: headH, pebbles: pebbles, ZONES: ZONES, trig: trig, ch: ch, entryX: entryX, startX: startX, exitTo: exitTo };
 
     useEffect(function () {
       function r() { var el = stageRef.current; sizeS[1]({ w: el ? el.clientWidth : window.innerWidth, h: el ? el.clientHeight : window.innerHeight }); }
@@ -2532,13 +2555,31 @@ a.c-row:focus-visible, .copy:focus-visible { outline: none; box-shadow: 0 0 0 3p
       showToast({ kicker: 'postK', text: w.t[L.t === T.en ? 1 : 0], icon: 'star' });
       setTimeout(function () { var el = frameRefs.current[id]; flyToBag(el && el.querySelector('img'), 'p' + id, 'post', id, WTONES[w.cat]); }, 120);
     }
-    var live = useRef({}); live.current = { finale: function () { blip(523, .15); setTimeout(function () { blip(659, .15); }, 140); setTimeout(function () { blip(784, .15); }, 280); setTimeout(function () { blip(1046, .4); }, 420); setPanel('finale'); setSeen(function (o) { if (o['5:fin']) return o; var n = Object.assign({}, o); n['5:fin'] = true; return n; }); setTimeout(function () { showToast({ kicker: 'achieveK', text: live.current.t.ch5.achieve, icon: 'star' }); }, 600); }, beacons: beacons, allLit: [0, 1, 2, 3].every(function (x) { return beacons[x]; }), flipSwitch: flipSwitch, trigger: trigger, pound: pound, landPound: landPound, openWork: openWork, closeWork: closeWork, viewed: viewed, takeQuest: takeQuest, panel: panel, jump: jump, input: input, trigger: trigger, t: t, got: got, lit: lit, lightStep: lightStep, startExit: startExit, switchTo: switchTo };
+    /* secret: ↑↑↓↓←→←→ B A grows wings; flying until Space (or B on the pad) */
+    var CODE = 'UUDDLRLRBA';
+    function secret(tok) {
+      var s = S.current; s.code = ((s.code || '') + tok).slice(-CODE.length);
+      if (s.code === CODE && !s.fly) { s.code = ''; startFly(); }
+    }
+    function startFly() {
+      var s = S.current; s.fly = true; s.flyArmed = true; s.vy = 0; s.sit = false; s.pound = false; s.forced = null; s.y = Math.max(s.y, 40);
+      blip(523, .12, 'triangle', .06); setTimeout(function () { blip(659, .12, 'triangle', .06); }, 110); setTimeout(function () { blip(784, .12, 'triangle', .06); }, 220); setTimeout(function () { blip(1046, .3, 'triangle', .06); }, 330);
+      wingS[1](true); showToast({ kicker: 'secretK', text: coarse ? live.current.t.flyOnTouch : live.current.t.flyOn, icon: 'star' });
+    }
+    function stopFly() { var s = S.current; if (!s.fly) return; s.fly = false; s.vy = 0; blip(392, .2, 'sine', .05); wingS[1](false); }
+    var live = useRef({}); live.current = { secret: secret, stopFly: stopFly, finale: function () { blip(523, .15); setTimeout(function () { blip(659, .15); }, 140); setTimeout(function () { blip(784, .15); }, 280); setTimeout(function () { blip(1046, .4); }, 420); setPanel('finale'); setSeen(function (o) { if (o['5:fin']) return o; var n = Object.assign({}, o); n['5:fin'] = true; return n; }); setTimeout(function () { showToast({ kicker: 'achieveK', text: live.current.t.ch5.achieve, icon: 'star' }); }, 600); }, beacons: beacons, allLit: [0, 1, 2, 3].every(function (x) { return beacons[x]; }), flipSwitch: flipSwitch, trigger: trigger, pound: pound, landPound: landPound, openWork: openWork, closeWork: closeWork, viewed: viewed, takeQuest: takeQuest, panel: panel, jump: jump, input: input, trigger: trigger, t: t, got: got, lit: lit, lightStep: lightStep, startExit: startExit, switchTo: switchTo };
     useEffect(function () {
       function down(e) {
         var L = live.current, s = S.current, k = e.key;
         s.keys.shift = e.shiftKey;
         if (k === 'Escape') { e.preventDefault(); if (L.panel && L.panel.indexOf('work:') === 0) L.closeWork(); else setPanel(L.panel ? null : 'menu'); return; }
         if (L.panel || S.current.cut) return;
+        if (!e.repeat) { var tok = { ArrowUp: 'U', ArrowDown: 'D', ArrowLeft: 'L', ArrowRight: 'R', b: 'B', B: 'B', a: 'A', A: 'A' }[k]; L.secret(tok || 'x'); }
+        if (s.fly) {
+          if (k === ' ' || k === 'Spacebar') { e.preventDefault(); L.input(); L.stopFly(); return; }
+          if (k === 'ArrowUp' || k === 'w' || k === 'W') { s.keys.up = true; L.input(); e.preventDefault(); return; }
+          if (k === 'ArrowDown' || k === 's' || k === 'S') { s.keys.down = true; L.input(); e.preventDefault(); return; }
+        }
         var isDown = k === 'ArrowDown' || k === 's' || k === 'S';
         if (!isDown && s.sit && !e.repeat) s.sit = false;
         if (isDown && !e.repeat) {
@@ -2562,6 +2603,7 @@ a.c-row:focus-visible, .copy:focus-visible { outline: none; box-shadow: 0 0 0 3p
         if (k === 'ArrowRight' || k === 'd' || k === 'D') s.keys.right = false;
         if (k === 'ArrowDown' || k === 's' || k === 'S') s.keys.down = false;
         if (k === 'z' || k === 'Z') s.keys.z = false;
+        if (k === 'ArrowUp' || k === 'w' || k === 'W') s.keys.up = false;
       }
       function blur() { S.current.keys = {}; }
       window.addEventListener('keydown', down); window.addEventListener('keyup', up); window.addEventListener('blur', blur);
@@ -2616,9 +2658,9 @@ a.c-row:focus-visible, .copy:focus-visible { outline: none; box-shadow: 0 0 0 3p
         var dir = 0;
         if (!s.busy && !s.cut) {
           dir = (s.keys.right ? 1 : 0) - (s.keys.left ? 1 : 0);
-          if (s.keys.down && s.y === 0) dir = 0;
+          if (s.keys.down && s.y === 0 && !s.fly) dir = 0;
           if (now < (s.tripUntil || 0)) dir = 0;
-          var speed = s.keys.shift && s.keys.z ? 760 : s.keys.shift ? 380 : 200;
+          var speed = s.keys.shift && s.keys.z ? 760 : s.keys.shift ? 380 : s.fly ? 300 : 200;
           var nx = Math.max(70, Math.min(g.WORLD - 70, s.x + dir * speed * dt));
           /* crates are solid from the side unless the hero is above them */
           g.plats.forEach(function (q) {
@@ -2632,7 +2674,7 @@ a.c-row:focus-visible, .copy:focus-visible { outline: none; box-shadow: 0 0 0 3p
           g.pebbles.forEach(function (pb) {
             var d = Math.abs(nx - pb.x);
             if (d > 70) s.tripped[pb.id] = false;
-            if (dir && s.y === 0 && d < 14 && !s.tripped[pb.id]) {
+            if (dir && s.y === 0 && !s.fly && d < 14 && !s.tripped[pb.id]) {
               s.tripped[pb.id] = true; s.tripUntil = now + 1600; s.forced = 'trip'; s.forcedUntil = now + 720; s.forcedNext = { p: 'dizzy', until: now + 1700 };
               s.tripDir = dir > 0 ? 1 : -1; s.slideV = s.tripDir * (s.keys.shift ? 200 : 110); s.vy = 0; blip(220, .25, 'triangle', .07); setTimeout(function () { blip(150, .2, 'sine', .06); }, 380);
             }
@@ -2644,7 +2686,12 @@ a.c-row:focus-visible, .copy:focus-visible { outline: none; box-shadow: 0 0 0 3p
         function over(q, pad) { return Math.abs(s.x - q.x) <= q.w / 2 + pad; }
         var floor = 0;
         g.plats.forEach(function (q) { if (over(q, 6) && q.top <= s.y + 1 && q.top > floor) floor = q.top; });
-        if (s.y > floor + 0.5 || s.vy > 0) {
+        if (s.fly) {
+          var vdir = (s.keys.up ? 1 : 0) - (s.keys.down ? 1 : 0);
+          s.flyT = (s.flyT || 0) + dt;
+          s.y = Math.max(0, Math.min(g.flyMax, s.y + vdir * 280 * dt + (vdir ? 0 : Math.sin(s.flyT * 3) * 12 * dt)));
+          s.vy = 0;
+        } else if (s.y > floor + 0.5 || s.vy > 0) {
           s.vy -= 2100 * dt; var ny = s.y + s.vy * dt;
           if (s.vy > 0) {
             /* head bump: content blocks are solid from below */
@@ -2665,7 +2712,7 @@ a.c-row:focus-visible, .copy:focus-visible { outline: none; box-shadow: 0 0 0 3p
         }
         s.floor = floor;
         /* crouch charge: ↓ held on the ground, standing still, for over a second */
-        if (s.keys.down && !dir && s.y <= floor + 0.5 && !s.cut) { if (s.crouchT == null) s.crouchT = now; if (!s.charged && now - s.crouchT > 1000) { s.charged = true; blip(880, .08, 'sine', .04); } }
+        if (s.keys.down && !dir && s.y <= floor + 0.5 && !s.cut && !s.fly) { if (s.crouchT == null) s.crouchT = now; if (!s.charged && now - s.crouchT > 1000) { s.charged = true; blip(880, .08, 'sine', .04); } }
         else { if (s.charged) s.chargedUntil = now + 350; s.crouchT = null; s.charged = false; }
         if (playerRef.current) playerRef.current.classList.toggle('charged', !!s.charged);
         if (floor > 0 && s.y <= floor + 0.5 && !s.cut) g.plats.forEach(function (q) { if (q.step != null && over(q, 6) && Math.abs(q.top - floor) < 1) live.current.lightStep(q.step); });
@@ -2682,7 +2729,8 @@ a.c-row:focus-visible, .copy:focus-visible { outline: none; box-shadow: 0 0 0 3p
         var idleFor = now - s.lastInput, p;
         var air = s.y > s.floor + 0.5;
         if (s.sit && (dir || air)) s.sit = false;
-        if (air) p = s.pound ? 'crouch' : dir ? (s.vy > 0 ? 'airSide' : 'fallSide') : 'air';
+        if (s.fly) p = dir ? 'airSide' : 'air';
+        else if (air) p = s.pound ? 'crouch' : dir ? (s.vy > 0 ? 'airSide' : 'fallSide') : 'air';
         else if (s.sit) p = 'sit';
         else if (s.forced && (!dir || s.forced === 'trip' || s.forced === 'dizzy')) p = s.forced;
         else if (s.keys.down && !s.busy) p = 'crouch';
@@ -2736,6 +2784,16 @@ a.c-row:focus-visible, .copy:focus-visible { outline: none; box-shadow: 0 0 0 3p
     function onPad(name, isDown) {
       var s = S.current; if (isDown) input();
       if (panel) return;
+      if (isDown) secret({ up: 'U', down: 'D', left: 'L', right: 'R', A: 'A', B: 'B' }[name] || 'x');
+      if (s.fly) {
+        if (name === 'up') s.keys.up = isDown;
+        if (name === 'down') s.keys.down = isDown;
+        if (name === 'left') s.keys.left = isDown;
+        if (name === 'right') s.keys.right = isDown;
+        if (name === 'A') s.keys.shift = isDown;
+        if (isDown && name === 'B' && s.flyArmed) stopFly();
+        return;
+      }
       if (name === 'left') s.keys.left = isDown;
       if (name === 'right') s.keys.right = isDown;
       if (name === 'down') { s.keys.down = isDown; if (isDown) { if (s.y > (s.floor || 0) + 0.5) pound(); else geo.current.plats.forEach(function (q) { if (q.bench && Math.abs(s.x - q.x) <= q.w / 2 + 6 && Math.abs(q.top - s.y) < 1) s.sit = true; }); } }
@@ -3145,7 +3203,9 @@ a.c-row:focus-visible, .copy:focus-visible { outline: none; box-shadow: 0 0 0 3p
           return h('div', { key: j, style: { position: 'absolute', left: d[0], bottom: feet - 6, transform: 'translateX(-50%)' } }, h(V.WorldProp, { kind: d[1], tone: d[2], size: 96 }));
         })),
         h('span', { className: 'p-shadow', ref: shadowRef, style: { bottom: feet - 6, width: charSize * .6 } }),
-        h('div', { className: 'player', ref: playerRef, style: { bottom: feet - charSize * 0.05 } }, h(V.Character, { pose: pose, facing: facing, size: charSize, label: t.me }))),
+        h('div', { className: 'player' + (flying ? ' flying face-' + facing : ''), ref: playerRef, style: { bottom: feet - charSize * 0.05 } },
+          flying ? h('span', { className: 'wings', 'aria-hidden': true }, h('i', { className: 'wing l' }, h('b', null), h('b', null), h('b', null)), h('i', { className: 'wing r' }, h('b', null), h('b', null), h('b', null))) : null,
+          h(V.Character, { pose: pose, facing: facing, size: charSize, label: t.me }))),
       h('div', { className: 'layer', ref: refs.fg, style: layerStyle(1.4), 'aria-hidden': true },
         fg.map(function (b, j) { return h('div', { key: j, className: ch === 1 ? 'fg-rock' : ch === 2 ? 'fg-rock fg-rock2' : ch === 3 ? 'fg-bush fg-hedge3' : ch === 4 ? 'fg-bush fg-plant4' : ch === 5 ? 'fg-rock fg-rock5' : 'fg-bush', style: { left: b.x, width: b.w, height: b.h, bottom: -b.h * .35 } }); })));
 
