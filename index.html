@@ -1444,6 +1444,10 @@ a.c-row:focus-visible, .copy:focus-visible { outline: none; box-shadow: 0 0 0 3p
 /* wings v5: from the side the far wing strokes opposite to the near wing */
 .player.fly-side.face-right .wing.r { animation-name: flap-l !important; }
 .player.fly-side.face-left .wing.l { animation-name: flap !important; }
+/* wings v6: far wing a touch brighter; near wing set further back from the direction of travel */
+.player.fly-side.face-right .wing.r, .player.fly-side.face-left .wing.l { filter: brightness(.9) !important; }
+.player.fly-side.face-right .wing.l { translate: -10px 0; }
+.player.fly-side.face-left .wing.r { translate: 10px 0; }
 
 </style>
 <div id="root"></div>
